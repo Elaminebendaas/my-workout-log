@@ -1,5 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google'
 
+
+
 const authOptions = {
 
     providers: [
@@ -9,6 +11,12 @@ const authOptions = {
       }),
      
     ],
+    callbacks:{
+      async signIn(profile){
+
+      }
+    }
+    
 }
 
 export { authOptions }
