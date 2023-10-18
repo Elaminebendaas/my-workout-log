@@ -1,6 +1,4 @@
 import GoogleProvider from 'next-auth/providers/google'
-
-import type { Profile } from 'next-auth'
 import db from '@/lib/db.'
 
 
