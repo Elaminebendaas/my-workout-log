@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import Navbar  from './components/Navbar'
 import { Inter } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
+
 const inter = Inter({ subsets: ['latin'] })
 
 /* export const metadata: Metadata = {
