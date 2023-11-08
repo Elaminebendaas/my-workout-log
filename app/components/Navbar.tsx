@@ -33,7 +33,7 @@ export default function Navbar(){
                                 <li>
                                     {
                                         pathName === '/home' ?
-                                        <Link href="/home" className="block py-2 pl-3 pr-4 rounded text-blue-700  font-semibold" >Home</Link>
+                                        <Link href="/home" className="block py-2 pl-3 pr-4 rounded text-blue-700 font-semibold" >Home</Link>
                                         :
                                         <Link href="/home" className="block py-2 pl-3 pr-4 text-gray-900 bg-blue-700 rounded md:bg-transparent  md:p-0 md:dark:text-blue-500" >Home</Link>
                                     }
