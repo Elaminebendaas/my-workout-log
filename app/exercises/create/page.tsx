@@ -11,11 +11,9 @@ export default function Create(){
     if (status === "loading") {
       return <p>Loading...</p>
     }
-  
     if (status === "unauthenticated") {
         router.push('/')
     }
-
     return(<>
     
     

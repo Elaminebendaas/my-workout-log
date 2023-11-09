@@ -11,11 +11,9 @@ export default function Cardio(){
     if (status === "loading") {
       return <p>Loading...</p>
     }
-  
     if (status === "unauthenticated") {
         router.push('/')
     }
-
     return(
         <>
             hello this is the cardio page

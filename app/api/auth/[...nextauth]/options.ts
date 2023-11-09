@@ -1,8 +1,6 @@
 import GoogleProvider from 'next-auth/providers/google'
 import db from '@/lib/db.'
 
-
-
 const authOptions = {
 
     providers: [
@@ -10,7 +8,6 @@ const authOptions = {
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       }),
-     
     ],
     callbacks:{
       async signIn( profile: any){
@@ -24,7 +21,6 @@ const authOptions = {
             return true
           }
         } catch (error) {
-           console.log(error)
            return false 
         }
         try {
@@ -36,7 +32,6 @@ const authOptions = {
             }
           })
         } catch (error) {
-          console.log(error)
           return false
         }
         return true
