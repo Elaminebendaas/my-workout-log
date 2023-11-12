@@ -16,3 +16,7 @@ model User{
   name String 
   image String
 }
+
+model Exercise{
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+}
