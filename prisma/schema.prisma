@@ -11,12 +11,21 @@ datasource db {
 }
 
 model User{
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  email       String @unique
-  name String 
-  image String
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  email      String @unique
+  name       String 
+  image      String
+  excersises String[]
 }
 
-model Exercise{
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+model Exercises{
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  ownerID   String
+  name      String @unique
+  history   Historic[]
+}
+
+type Historic{
+
+
 }
