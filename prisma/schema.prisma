@@ -22,10 +22,24 @@ model Exercises{
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   ownerID   String
   name      String @unique
-  history   Historic[]
+  history   HistoricExercise[]
 }
 
-type Historic{
+model Workout{
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  ownerID   String
+  name      String @unique
+  exercises String[]  
+}
 
+type HistoricExercise{
+  date DateTime
+  weightLBS Int
+  reps Int
+  sets Int
+}
 
+type HistoricWorkout{
+  dateCreated DateTime
+  workoutCount Int
 }
