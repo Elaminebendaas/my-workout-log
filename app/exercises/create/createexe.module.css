@@ -1,0 +1,12 @@
+.header {
+    font-weight: 800;
+    font-size: 28px;
+}
+
+.form {
+    display: block;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    
+}

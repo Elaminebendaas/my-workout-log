@@ -2,19 +2,19 @@
 
 import { useSession } from "next-auth/react"
 import Image from "next/image";
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 
 
 export default function Home(){
     const {data, status} = useSession();
-    const router = useRouter()
+    
 
     if(status === "loading"){
         return(<>
         <h1>Loading....</h1>
             </>)
     }else if(status === 'unauthenticated'){
-        router.push('/')
+        redirect('/')
     }
 
     

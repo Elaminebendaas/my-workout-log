@@ -25,7 +25,7 @@ model Exercises{
   history   HistoricExercise[]
 }
 
-model Workout{
+model Workouts{
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   ownerID   String
   name      String @unique
