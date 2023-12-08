@@ -15,6 +15,7 @@ export default function Home(){
             </>)
     }else if(status === 'unauthenticated'){
         redirect('/')
+        
     }
 
     

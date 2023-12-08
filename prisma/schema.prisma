@@ -20,16 +20,16 @@ model User{
 
 model Exercises{
   id        String @id @default(auto()) @map("_id") @db.ObjectId
-  ownerID   String
+  ownerEmail   String
   name      String @unique
   history   HistoricExercise[]
 }
 
 model Workouts{
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  ownerID   String
-  name      String @unique
-  exercises String[]  
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  ownerEmail  String
+  name        String @unique
+  exercises   String[]  
 }
 
 type HistoricExercise{

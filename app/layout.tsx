@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import Navbar  from './components/Navbar'
 import { Inter } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <div className='flex min-h-screen flex-col lg:p-24 md:p-24 sm:pr-12 sm:pl-12'>
           {children}
         </div>
+        <Toaster />
       </body>
     </html>
   </SessionProvider>
