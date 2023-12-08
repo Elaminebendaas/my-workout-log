@@ -7,8 +7,21 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 
 export default function Create(){
+
+
+    async function createExer(formData: FormData){
+      'use server'
+
+
+
+    }
+
+
     
     const { data: session, status } = useSession()
+
+
+
 
     if (status === "loading") {
       return <p>Loading...</p>
@@ -22,13 +35,13 @@ export default function Create(){
     <div>
       <h1 className={style.header}>Create an Exercise</h1>
 
-      <form className={style.form}>
+      <form className={style.form} action={createExer}>
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label htmlFor="exercise">Exercise</Label>
-          <Input type="text" id="exercise" placeholder="Exercise Name" />
+          <Input type="text" id="exercise" placeholder="Exercise Name" aria-required />
         </div>
 
-        <Button>Create Exercise</Button>
+        <Button type='submit'>Create Exercise</Button>
 
         
       </form>
