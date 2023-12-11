@@ -6,8 +6,8 @@ import { Plus } from "lucide-react"
 import { redirect } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { useSession } from "next-auth/react"
-
 import ExcerciseContainer from "../components/ExercisesComponents/ExerciseContainer"
+
 export default function Exercises(){
 
     const { data: session, status } = useSession()
@@ -15,7 +15,7 @@ export default function Exercises(){
     if (status === "loading") {
       return <p>Loading...</p>
     }
-    if (status === "unauthenticated") {
+    if (status === "unauthenticated" || session?.user?.email === undefined || session?.user?.email === null) {
         redirect('/')
     }
     return(
@@ -34,7 +34,7 @@ export default function Exercises(){
 
             <Separator/>
 
-          {  <ExcerciseContainer/>}
+           <ExcerciseContainer email={session?.user?.email}/>
         </main>
     
     </>) 

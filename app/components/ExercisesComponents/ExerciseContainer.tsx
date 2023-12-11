@@ -1,8 +1,11 @@
 import ExcerciseItem from "./ExerciseItem"
+import { fetchExercises } from "@/app/exercises/actions"
 
 
 
-export default function ExcerciseContainer(){
+
+export default function ExcerciseContainer({email}: {email: string}){
+
 
     return(
     <>
