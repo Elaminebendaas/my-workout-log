@@ -9,22 +9,31 @@ export async function createExercise(formData: FormData, email: string){
         return false
     }
     else{
-        const newExercise = await db.exercises.create({
-            data: {
-                ownerEmail: email,
-                name: name
-            }
-        })
+        try {
+            const newExercise = await db.exercises.create({
+                data: {
+                    ownerEmail: email,
+                    name: name
+                }
+            })    
+        } catch (error) {
+            return false
+        }
+        
         return true
     }
   }
+
 export async function fetchExercises(email: string){
+
+    
     const exercises = await db.exercises.findMany(
         {
             where:{
                 ownerEmail: email
             }
     })
+
 
     if(exercises) return exercises
     else return false

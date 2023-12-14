@@ -1,10 +1,23 @@
+
 import ExcerciseItem from "./ExerciseItem"
 import { fetchExercises } from "@/app/exercises/actions"
+import { useEffect, useState, useRef } from "react"
 
 
 
+export default  function ExcerciseContainer({email}: {email: string}){
 
-export default function ExcerciseContainer({email}: {email: string}){
+    const [exercises, setExercises] = useState<any>()
+    const myExercises  = useRef(exercises)
+    
+    useEffect( () => {
+        const fetch = async () =>{
+            const fetchedExercises = await fetchExercises(email)        
+            setExercises(fetchedExercises) 
+            myExercises.current = fetchedExercises
+        }
+        fetch()
+    },[email, myExercises])
 
 
     return(

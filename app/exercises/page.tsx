@@ -18,6 +18,7 @@ export default function Exercises(){
     if (status === "unauthenticated" || session?.user?.email === undefined || session?.user?.email === null) {
         redirect('/')
     }
+    console.log(session?.user?.email)
     return(
     <>
         <main className="">
@@ -33,7 +34,7 @@ export default function Exercises(){
             </div>
 
             <Separator/>
-
+    
            <ExcerciseContainer email={session?.user?.email}/>
         </main>
     
