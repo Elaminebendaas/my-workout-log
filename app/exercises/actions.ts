@@ -25,7 +25,6 @@ export async function createExercise(formData: FormData, email: string){
   }
 
 export async function fetchExercises(email: string){
-
     
     const exercises = await db.exercises.findMany(
         {
@@ -37,5 +36,24 @@ export async function fetchExercises(email: string){
 
     if(exercises) return exercises
     else return false
+}
 
+
+export async function deleteExercise(id: string, email: string){
+    try {
+        const exercise = await db.exercises.delete({
+            where: {
+                id: id,
+                ownerEmail: email
+            }
+        })    
+    } catch (error) {
+        return false
+    }
+    return true
+}
+
+export async function viewExercise(id: string){
+    
+    
 }

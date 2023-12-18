@@ -21,14 +21,14 @@ model User{
 model Exercises{
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   ownerEmail   String
-  name      String @unique
+  name      String 
   history   HistoricExercise[]
 }
 
 model Workouts{
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   ownerEmail  String
-  name        String @unique
+  name        String 
   exercises   String[]  
 }
 

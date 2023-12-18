@@ -18,7 +18,7 @@ export default function Exercises(){
     if (status === "unauthenticated" || session?.user?.email === undefined || session?.user?.email === null) {
         redirect('/')
     }
-    console.log(session?.user?.email)
+
     return(
     <>
         <main className="">
