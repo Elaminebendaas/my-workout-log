@@ -6,7 +6,7 @@ import { Plus } from "lucide-react"
 import { redirect } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { useSession } from "next-auth/react"
-import ExcerciseContainer from "../components/ExercisesComponents/ExerciseContainer"
+import ExcerciseContainer from "@/components/ExercisesComponents/ExerciseContainer"
 
 export default function Exercises(){
 

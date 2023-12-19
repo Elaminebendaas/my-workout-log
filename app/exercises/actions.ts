@@ -25,17 +25,17 @@ export async function createExercise(formData: FormData, email: string){
   }
 
 export async function fetchExercises(email: string){
-    
-    const exercises = await db.exercises.findMany(
-        {
-            where:{
-                ownerEmail: email
-            }
-    })
-
-
-    if(exercises) return exercises
-    else return false
+    try {
+        const exercises = await db.exercises.findMany(
+            {
+                where:{
+                    ownerEmail: email
+                }
+        })
+        if(exercises) return exercises
+    } catch (error) {
+        return false
+    }
 }
 
 
