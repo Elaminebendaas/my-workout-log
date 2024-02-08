@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react";
 export default function ExcerciseContainer({ email }: { email: string }) {
   const [exercises, setExercises] = useState<any>();
   const [fetchState, setFetchState] = useState(false);
+  const [changeState, setChangeState] = useState(false);
   const myExercises = useRef<Exercises[] | false>();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export default function ExcerciseContainer({ email }: { email: string }) {
       setFetchState(true);
     };
     fetch();
-  }, [email, myExercises]);
+  }, [email, myExercises, changeState]);
 
   if (fetchState === false) {
     return (
@@ -35,7 +36,13 @@ export default function ExcerciseContainer({ email }: { email: string }) {
             <p>You currently have no exercises. Go ahead and create one!</p>
           ) : (
             myExercises.current?.map((item: Exercises, key: number) => {
-              return <ExcerciseItem key={key} workout={item} />;
+              return (
+                <ExcerciseItem
+                  key={key}
+                  workout={item}
+                  changeState={() => setChangeState(!changeState)}
+                />
+              );
             })
           )}
         </div>

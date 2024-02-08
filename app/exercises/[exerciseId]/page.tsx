@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Exercises } from "@prisma/client";
 
 export default function Page({ params }: { params: { exerciseId: string } }) {
-  const [exercise, setExercise] = useState<false | Exercises>();
+  const [exercise, setExercise] = useState<false | Exercises | null>(null);
 
   useEffect(() => {
     const fetchExercise = async (ID: string) => {
@@ -15,7 +15,13 @@ export default function Page({ params }: { params: { exerciseId: string } }) {
     fetchExercise(params.exerciseId);
   }, [setExercise, params.exerciseId]);
 
-  if (!exercise) {
+  if(exercise === null){
+    return (
+      <>
+        <div>Loading your exercise....</div>
+      </>
+    );
+  }else if (!exercise) {
     return (
       <>
         <div>Could not find the exercise you are looking for</div>

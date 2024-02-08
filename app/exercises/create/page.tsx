@@ -9,6 +9,7 @@ import { createExercise } from "../actions";
 import { useCallback } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
+
 export default function Create() {
   const { data: session, status } = useSession();
   const { toast } = useToast();
@@ -33,10 +34,18 @@ export default function Create() {
 
       if (res) {
         return redirect("/exercises");
-      } else {
+      } else if (res === false) {
         toast({
           title: "Error",
-          description: "The exercise name cannot be blank",
+          description:
+            "The exercise name cannot be blank or there was an error",
+          variant: "destructive",
+        });
+      } else if (res === null) {
+        toast({
+          title: "Exercise Already Exists",
+          description:
+            "This exercise already exists, you cannot have duplicates",
           variant: "destructive",
         });
       }

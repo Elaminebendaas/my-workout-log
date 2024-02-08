@@ -1,8 +1,39 @@
 "use server";
 import db from "@/lib/db.";
+import { User } from "@prisma/client";
+
+async function checkExists(user: User, name: string) {
+  let exercise_return;
+
+  user?.excersises.map(async (item) => {
+    const exercise = await viewExercise(item);
+    console.log(item);
+    if (exercise) {
+      if (exercise.name === name) {
+        exercise_return = null;
+        return null;
+      }
+    }
+  });
+}
 
 export async function createExercise(formData: FormData, email: string) {
   const name = formData.get("exercise") as string;
+  const user = await db.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (user) {
+    const checkExercise = await checkExists(user, name);
+    console.log(checkExercise);
+    if (checkExercise === null) {
+      return null;
+    }
+  } else {
+    return false;
+  }
 
   if (name.length <= 0) {
     return false;
@@ -13,6 +44,11 @@ export async function createExercise(formData: FormData, email: string) {
           ownerEmail: email,
           name: name,
         },
+      });
+      user.excersises.push(newExercise.id);
+      const updatedUser = await db.user.update({
+        where: { email: email },
+        data: { excersises: user.excersises },
       });
     } catch (error) {
       return false;
