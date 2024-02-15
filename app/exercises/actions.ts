@@ -8,17 +8,22 @@ import { User } from "@prisma/client";
  * @param name The name of the workout
  */
 async function checkExists(user: User, name: string) {
-  let exercise_return;
-  user?.excersises.map(async (item) => {
-    const exercise = await viewExercise(item);
-    console.log(item);
-    if (exercise) {
-      if (exercise.name === name) {
-        exercise_return = null;
-        return null;
+  const request = Promise.all(
+    user?.excersises.map(async (item) => {
+      console.log(item);
+      const exercise = await viewExercise(item);
+      if (exercise) {
+        if (exercise.name === name) {
+          return true;
+        }
       }
-    }
-  });
+    })
+  );
+
+  const index = (await request).indexOf(true);
+
+  if (index !== -1) return true;
+  else return false;
 }
 
 /**
@@ -37,8 +42,7 @@ export async function createExercise(formData: FormData, email: string) {
 
   if (user) {
     const checkExercise = await checkExists(user, name);
-    console.log(checkExercise);
-    if (checkExercise === null) {
+    if (checkExercise) {
       return null;
     }
   } else {
@@ -96,7 +100,23 @@ export async function deleteExercise(id: string, email: string) {
       ownerEmail: email,
     },
   });
-  if (exercise) return true;
+  const userExerciseDelete = await db.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  const index = userExerciseDelete?.excersises.indexOf(id);
+
+  if (index !== undefined) {
+    userExerciseDelete?.excersises.splice(index, 1);
+
+    const updatedUser = await db.user.update({
+      where: { email: email },
+      data: { excersises: userExerciseDelete?.excersises },
+    });
+  }
+
+  if (exercise && index) return true;
   else return false;
 }
 
