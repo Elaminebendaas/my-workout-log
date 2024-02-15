@@ -2,9 +2,13 @@
 import db from "@/lib/db.";
 import { User } from "@prisma/client";
 
+/**
+ * Function check if a exercise exists in the exercises collection
+ * @param user The users email
+ * @param name The name of the workout
+ */
 async function checkExists(user: User, name: string) {
   let exercise_return;
-
   user?.excersises.map(async (item) => {
     const exercise = await viewExercise(item);
     console.log(item);
@@ -17,6 +21,12 @@ async function checkExists(user: User, name: string) {
   });
 }
 
+/**
+ * Creates an exercise
+ * @param formData Data from the form specifically exercise name
+ * @param email the users email
+ * @returns if true it was successfully created, false there was no name input, null exercise already exists
+ */
 export async function createExercise(formData: FormData, email: string) {
   const name = formData.get("exercise") as string;
   const user = await db.user.findUnique({
@@ -58,33 +68,43 @@ export async function createExercise(formData: FormData, email: string) {
   }
 }
 
+/**
+ * Fetchs exercises from a specific user using their email
+ * @param email the users email
+ * @returns  returns all the users exercises, if false the user was not found
+ */
 export async function fetchExercises(email: string) {
-  try {
-    const exercises = await db.exercises.findMany({
-      where: {
-        ownerEmail: email,
-      },
-    });
-    if (exercises) return exercises;
-  } catch (error) {
-    return false;
-  }
+  const exercises = await db.exercises.findMany({
+    where: {
+      ownerEmail: email,
+    },
+  });
+  if (exercises) return exercises;
+  else return false;
 }
 
+/**
+ * Deletes exercise specified
+ * @param id the exercises id
+ * @param email the users email
+ * @returns  if true the exercise was successfully deleted, false the exercise could not be deleted
+ */
 export async function deleteExercise(id: string, email: string) {
-  try {
-    const exercise = await db.exercises.delete({
-      where: {
-        id: id,
-        ownerEmail: email,
-      },
-    });
-  } catch (error) {
-    return false;
-  }
-  return true;
+  const exercise = await db.exercises.delete({
+    where: {
+      id: id,
+      ownerEmail: email,
+    },
+  });
+  if (exercise) return true;
+  else return false;
 }
 
+/**
+ * Send the exercise information
+ * @param id The exercises unique identifier
+ * @returns  The exercises content to be displayed, if false it could not be found incorrect ID
+ */
 export async function viewExercise(id: string) {
   const exercise = await db.exercises.findUnique({
     where: {
